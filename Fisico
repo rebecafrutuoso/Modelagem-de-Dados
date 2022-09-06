@@ -1,0 +1,31 @@
+/* Lógico_3: */
+
+CREATE TABLE CLIENTE (
+    Atributo_CPF(NOT NULL) NUMERIC(11) PRIMARY KEY UNIQUE,
+    Atributo_NomeCompleto VARCHAR2(100),
+    Atributo_Email VARCHAR2(60),
+    Atributo_Senha CHAR(12),
+    Atributo_Telefone NUMERIC(16)
+);
+
+CREATE TABLE VIAGEM (
+    Atributo_Destino VARCHAR2,
+    Atributo_Pacote VARCHAR2,
+    Atributo_Promocao VARCHAR2,
+    Id_Passagem VARCHAR2 PRIMARY KEY UNIQUE,
+    Atributo_Origem VARCHAR2
+);
+
+CREATE TABLE Compra (
+    fk_VIAGENS_Passagem VARCHAR2,
+    fk_CLIENTE_Atributo_CPF NUMERIC(11),
+    Registro_de_Viagem VARCHAR2(20) UNIQUE
+);
+ 
+ALTER TABLE Compra ADD CONSTRAINT FK_Compra_1
+    FOREIGN KEY (fk_VIAGENS_Passagem)
+    REFERENCES VIAGEM (Id_Passagem);
+ 
+ALTER TABLE Compra ADD CONSTRAINT FK_Compra_2
+    FOREIGN KEY (fk_CLIENTE_Atributo_CPF)
+    REFERENCES CLIENTE (Atributo_CPF(NOT NULL));
